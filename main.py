@@ -56,7 +56,6 @@ def register_user2(username: str, password: str):
     with open("users.csv", "a", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow([username, password])
-    print(f"Пользователь {username} успешно зарегистрирован.")
 
 
 def main():
@@ -64,10 +63,26 @@ def main():
     print(register_user('BADADDR123'))
     print(register_user('Afdjbakjfbvkdjbn2*'))
 
+    # Тестирование успешного случая
     try:
-        register_user2("UserAgent", "Pererfdrd1@")
-    except ValueError as err:
-        print(err)
+        register_user2("JohnDoe", "Password123!")
+        print("Регистрация прошла успешно!")
+    except ValueError as e:
+        print(f"Ошибка: {e}")
+
+    # Тестирование неудачного случая по паролю...
+    try:
+        register_user2("JohnDoe", "Password123")
+        print("Регистрация прошла успешно!")
+    except ValueError as e:
+        print(f"Ошибка: {e}")
+
+    # Тестирование неудачного случая по юзернейму...
+    try:
+        register_user2("John Doe", "Password123!")
+        print("Регистрация прошла успешно!")
+    except ValueError as e:
+        print(f"Ошибка: {e}")
 
 
 if __name__ == '__main__':
